@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
 
 const services = [
   {
@@ -42,8 +43,31 @@ const services = [
 ]
 
 export function ServicesSection() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const [opacity, setOpacity] = useState(1)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return
+      const rect = sectionRef.current.getBoundingClientRect()
+      const elementCenter = window.innerHeight / 2
+      const distanceFromCenter = Math.abs(rect.top - elementCenter)
+      const maxDistance = window.innerHeight
+      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
+      setOpacity(newOpacity)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section className="py-20 px-6 bg-amber-50/50" id="services">
+    <section 
+      ref={sectionRef}
+      className="py-20 px-6 bg-amber-50/50 transition-opacity duration-300" 
+      id="services"
+      style={{ opacity }}
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

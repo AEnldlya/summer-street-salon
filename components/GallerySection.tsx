@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Image from 'next/image'
 
 const galleryItems = [
@@ -45,13 +45,34 @@ const galleryItems = [
 
 export function GallerySection() {
   const [filter, setFilter] = useState('all')
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const [opacity, setOpacity] = useState(1)
 
   const filtered = filter === 'all' 
     ? galleryItems 
     : galleryItems.filter(item => item.category === filter)
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return
+      const rect = sectionRef.current.getBoundingClientRect()
+      const elementCenter = window.innerHeight / 2
+      const distanceFromCenter = Math.abs(rect.top - elementCenter)
+      const maxDistance = window.innerHeight
+      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
+      setOpacity(newOpacity)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-white to-amber-50/30">
+    <section 
+      ref={sectionRef}
+      className="py-20 px-6 bg-gradient-to-b from-white to-amber-50/30 transition-opacity duration-300"
+      style={{ opacity }}
+    >
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

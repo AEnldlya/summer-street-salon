@@ -6,18 +6,25 @@ import Image from 'next/image'
 import { useRef, useState, useEffect } from 'react'
 
 export function HeroSection() {
-  const [scrollOpacity, setScrollOpacity] = useState(1)
   const sectionRef = useRef<HTMLDivElement>(null)
+  const [opacity, setOpacity] = useState(1)
 
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
-      const opacity = Math.max(0, 1 - rect.top / (window.innerHeight * 0.8))
-      setScrollOpacity(1 - opacity * 0.3)
+      const elementCenter = window.innerHeight / 2
+      
+      // Element position relative to viewport center
+      const distanceFromCenter = Math.abs(rect.top - elementCenter)
+      const maxDistance = window.innerHeight
+      
+      // Fade out as you scroll away
+      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
+      setOpacity(newOpacity)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -25,7 +32,7 @@ export function HeroSection() {
     <section 
       ref={sectionRef}
       className="relative h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-amber-100 overflow-hidden"
-      style={{ opacity: scrollOpacity, transition: 'opacity 0.1s linear' }}
+      style={{ opacity, transition: 'opacity 0.3s ease-out' }}
     >
       {/* Background hero images with overlay */}
       <div className="absolute inset-0">

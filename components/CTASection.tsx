@@ -2,10 +2,33 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useRef, useState, useEffect } from 'react'
 
 export function CTASection() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const [opacity, setOpacity] = useState(1)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return
+      const rect = sectionRef.current.getBoundingClientRect()
+      const elementCenter = window.innerHeight / 2
+      const distanceFromCenter = Math.abs(rect.top - elementCenter)
+      const maxDistance = window.innerHeight
+      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
+      setOpacity(newOpacity)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section className="py-20 px-6 bg-gradient-to-r from-amber-800 via-amber-900 to-amber-950">
+    <section 
+      ref={sectionRef}
+      className="py-20 px-6 bg-gradient-to-r from-amber-800 via-amber-900 to-amber-950 transition-opacity duration-300"
+      style={{ opacity }}
+    >
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
