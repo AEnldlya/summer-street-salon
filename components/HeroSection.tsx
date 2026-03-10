@@ -63,7 +63,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
+          <h1 className="text-4xl xs:text-5xl md:text-7xl font-bold text-white mb-4 xs:mb-6 leading-tight tracking-tight drop-shadow-lg">
             Transform Your Look
           </h1>
         </motion.div>
@@ -72,7 +72,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="text-xl md:text-2xl text-amber-50 mb-12 font-light drop-shadow-md"
+          className="text-base xs:text-lg md:text-2xl text-amber-50 mb-8 xs:mb-12 font-light drop-shadow-md px-4"
         >
           Expert hair care, cuts & color styling • Boston's #1 rated salon
         </motion.p>
@@ -81,17 +81,17 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center"
+          className="flex flex-col xs:flex-row gap-4 justify-center px-4"
         >
           <Link
             href="/booking"
-            className="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+            className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg w-full xs:w-auto text-center"
           >
             Book Your Appointment
           </Link>
           <Link
             href="/gallery"
-            className="px-8 py-4 border-2 border-amber-200 text-white font-semibold rounded-lg hover:bg-amber-700/30 transition-all duration-300 backdrop-blur-sm"
+            className="px-6 py-3 border-2 border-amber-200 text-white font-semibold hover:bg-amber-700/30 transition-all duration-300 backdrop-blur-sm w-full xs:w-auto text-center"
           >
             View Our Work
           </Link>
@@ -104,19 +104,19 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.6 }}
           className="mt-16 flex justify-center items-center gap-8 flex-wrap"
         >
-          <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg">
-            <div className="text-4xl font-bold text-amber-300">4.9</div>
-            <div className="text-amber-50 text-sm">247 Reviews</div>
+          <div className="bg-white/10 backdrop-blur-sm px-4 py-3 xs:px-6">
+            <div className="text-3xl xs:text-4xl font-bold text-amber-300">4.9</div>
+            <div className="text-amber-50 text-xs xs:text-sm">247 Reviews</div>
           </div>
           <div className="w-px h-12 bg-amber-300/40"></div>
-          <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg">
-            <div className="text-4xl font-bold text-amber-300">15+</div>
-            <div className="text-amber-50 text-sm">Years Experience</div>
+          <div className="bg-white/10 backdrop-blur-sm px-4 py-3 xs:px-6">
+            <div className="text-3xl xs:text-4xl font-bold text-amber-300">15+</div>
+            <div className="text-amber-50 text-xs xs:text-sm">Years Experience</div>
           </div>
-          <div className="w-px h-12 bg-amber-300/40"></div>
-          <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg">
-            <div className="text-4xl font-bold text-amber-300">2000+</div>
-            <div className="text-amber-50 text-sm">Happy Clients</div>
+          <div className="w-px h-12 bg-amber-300/40 hidden xs:block"></div>
+          <div className="bg-white/10 backdrop-blur-sm px-4 py-3 xs:px-6">
+            <div className="text-3xl xs:text-4xl font-bold text-amber-300">2000+</div>
+            <div className="text-amber-50 text-xs xs:text-sm">Happy Clients</div>
           </div>
         </motion.div>
       </div>

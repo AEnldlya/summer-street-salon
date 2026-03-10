@@ -28,7 +28,7 @@ export function Navigation() {
         <Link href="/" className="font-bold text-amber-900 transition-all" style={{ fontSize: Math.max(16, 24 - scrollY * 0.02) }}>
           <div className="flex items-center gap-2">
             <div 
-              className="rounded-full bg-gradient-to-br from-amber-600 to-amber-800 text-white flex items-center justify-center font-bold transition-all"
+              className="bg-gradient-to-br from-amber-600 to-amber-800 text-white flex items-center justify-center font-bold transition-all"
               style={{ width: logoSize, height: logoSize, fontSize: logoSize * 0.4 }}
             >
               S
@@ -50,7 +50,7 @@ export function Navigation() {
         {/* CTA Button */}
         <Link
           href="/booking"
-          className="hidden md:block px-6 py-2 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-lg transition-all duration-300 text-sm"
+          className="hidden md:block px-6 py-2 bg-amber-700 hover:bg-amber-800 text-white font-semibold transition-all duration-300 text-sm"
         >
           Book Now
         </Link>
@@ -82,7 +82,7 @@ export function Navigation() {
             <Link href="/contact" className="text-amber-900 hover:text-amber-700 font-semibold">Contact</Link>
             <Link
               href="/booking"
-              className="block px-6 py-2 bg-amber-700 text-white font-semibold rounded-lg text-center hover:bg-amber-800 transition-colors"
+              className="block px-6 py-2 bg-amber-700 text-white font-semibold text-center hover:bg-amber-800 transition-colors"
             >
               Book Now
             </Link>

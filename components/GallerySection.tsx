@@ -89,21 +89,21 @@ export function GallerySection() {
           viewport={{ once: true, margin: '-100px' }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h2 className="text-3xl xs:text-4xl md:text-5xl font-bold text-amber-900 mb-4">
             Our Gallery
           </h2>
-          <p className="text-amber-800 text-lg">
+          <p className="text-amber-800 text-sm xs:text-base md:text-lg px-4">
             See the transformations we've created for our clients
           </p>
         </motion.div>
 
         {/* Filter buttons */}
-        <div className="flex justify-center gap-4 mb-12 flex-wrap">
+        <div className="flex justify-center gap-2 xs:gap-4 mb-12 flex-wrap px-4">
           {['all', 'cut', 'color', 'treatment'].map(category => (
             <button
               key={category}
               onClick={() => setFilter(category)}
-              className={`px-6 py-2 rounded-full font-semibold transition-all ${
+              className={`px-3 xs:px-6 py-2 text-xs xs:text-sm font-semibold transition-all ${
                 filter === category
                   ? 'bg-amber-700 text-white'
                   : 'bg-white text-amber-900 border border-amber-300 hover:border-amber-700'
@@ -123,7 +123,7 @@ export function GallerySection() {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true, margin: '-50px' }}
-              className="relative h-64 bg-gradient-to-br from-amber-200 to-amber-300 rounded-lg overflow-hidden group cursor-pointer shadow-md hover:shadow-lg transition-shadow"
+              className="relative h-48 xs:h-64 bg-gradient-to-br from-amber-200 to-amber-300 overflow-hidden group cursor-pointer shadow-md hover:shadow-lg transition-shadow"
             >
               {/* Gallery image */}
               <Image
@@ -158,7 +158,7 @@ export function GallerySection() {
         >
           <a
             href="/booking"
-            className="inline-block px-8 py-3 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-lg transition-colors duration-300"
+            className="inline-block px-6 xs:px-8 py-3 bg-amber-700 hover:bg-amber-800 text-white font-semibold transition-colors duration-300"
           >
             Get Your Transformation
           </a>

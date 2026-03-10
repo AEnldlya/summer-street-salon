@@ -84,10 +84,10 @@ export function ServicesSection() {
           viewport={{ once: true, margin: '-100px' }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4 tracking-tight">
+          <h2 className="text-3xl xs:text-4xl md:text-5xl font-bold text-amber-900 mb-4 tracking-tight">
             Our Services
           </h2>
-          <p className="text-amber-800 text-lg max-w-2xl mx-auto font-light">
+          <p className="text-amber-800 text-sm xs:text-base md:text-lg max-w-2xl mx-auto font-light px-4">
             We offer a full range of professional hair services using premium products and techniques
           </p>
         </motion.div>
@@ -100,7 +100,7 @@ export function ServicesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true, margin: '-50px' }}
-              className="p-6 border border-amber-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white hover:border-amber-400"
+              className="p-4 xs:p-6 border border-amber-200 hover:shadow-lg transition-all duration-300 bg-white hover:border-amber-400"
             >
               <div className="flex justify-between items-start mb-4">
                 <h3 className="text-xl font-semibold text-amber-900">{service.name}</h3>
@@ -127,7 +127,7 @@ export function ServicesSection() {
           </p>
           <a
             href="/booking"
-            className="inline-block px-8 py-3 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-lg transition-colors duration-300"
+            className="inline-block px-6 xs:px-8 py-3 bg-amber-700 hover:bg-amber-800 text-white font-semibold transition-colors duration-300"
           >
             Book Now
           </a>

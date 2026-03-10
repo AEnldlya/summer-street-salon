@@ -44,23 +44,23 @@ export function CTASection() {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+          <h2 className="text-3xl xs:text-4xl md:text-5xl font-bold text-white mb-4 xs:mb-6 tracking-tight px-4">
             Ready for Your Transformation?
           </h2>
-          <p className="text-xl text-amber-50 mb-12 max-w-2xl mx-auto font-light">
+          <p className="text-base xs:text-lg md:text-xl text-amber-50 mb-8 xs:mb-12 max-w-2xl mx-auto font-light px-4">
             Book your appointment today and get 20% off your first visit
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col xs:flex-row gap-4 justify-center px-4">
             <Link
               href="/booking"
-              className="px-8 py-4 bg-amber-500 hover:bg-amber-600 text-amber-900 font-bold rounded-lg transition-colors transform hover:scale-105 duration-300"
+              className="px-6 xs:px-8 py-3 xs:py-4 bg-amber-500 hover:bg-amber-600 text-amber-900 font-bold transition-colors transform hover:scale-105 duration-300 w-full xs:w-auto text-center"
             >
               Book Appointment
             </Link>
             <a
               href="tel:+16173459300"
-              className="px-8 py-4 border-2 border-amber-300 text-amber-100 font-bold rounded-lg hover:bg-amber-700 hover:border-white transition-colors transform hover:scale-105 duration-300"
+              className="px-6 xs:px-8 py-3 xs:py-4 border-2 border-amber-300 text-amber-100 font-bold hover:bg-amber-700 hover:border-white transition-colors transform hover:scale-105 duration-300 w-full xs:w-auto text-center"
             >
               Call (617) 345-9300
             </a>
@@ -73,7 +73,7 @@ export function CTASection() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-amber-50"
+          className="mt-12 xs:mt-16 grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4 xs:gap-6 text-amber-50 px-4"
         >
           <div>
             <div className="font-semibold">Monday - Friday</div>

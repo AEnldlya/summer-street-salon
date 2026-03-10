@@ -71,10 +71,10 @@ export function TestimonialsSection() {
           viewport={{ once: true, margin: '-100px' }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4 tracking-tight">
+          <h2 className="text-3xl xs:text-4xl md:text-5xl font-bold text-amber-900 mb-4 tracking-tight">
             What Our Clients Say
           </h2>
-          <p className="text-amber-800 text-lg font-light">
+          <p className="text-amber-800 text-sm xs:text-base md:text-lg font-light px-4">
             Join thousands of happy customers
           </p>
         </motion.div>
@@ -87,7 +87,7 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true, margin: '-50px' }}
-              className="p-6 bg-white rounded-lg border border-amber-200 hover:shadow-lg hover:border-amber-400 transition-all duration-300"
+              className="p-4 xs:p-6 bg-white border border-amber-200 hover:shadow-lg hover:border-amber-400 transition-all duration-300"
             >
               {/* Rating */}
               <div className="mb-4">
@@ -116,10 +116,10 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="inline-block bg-gradient-to-r from-amber-50 to-white p-8 rounded-lg border border-amber-300">
-            <div className="text-5xl font-bold text-amber-900 mb-2">4.9 OUT OF 5</div>
+          <div className="inline-block bg-gradient-to-r from-amber-50 to-white p-6 xs:p-8 border border-amber-300 mx-4 xs:mx-0">
+            <div className="text-4xl xs:text-5xl font-bold text-amber-900 mb-2">4.9 OUT OF 5</div>
             <div className="text-amber-900 font-semibold mb-2">Based on 247 reviews</div>
-            <p className="text-amber-800 font-light">See all reviews on Google & Facebook</p>
+            <p className="text-amber-800 font-light text-sm xs:text-base">See all reviews on Google & Facebook</p>
           </div>
         </motion.div>
       </div>
