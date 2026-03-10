@@ -32,17 +32,21 @@ const testimonials = [
 
 export function TestimonialsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [opacity, setOpacity] = useState(1)
+  const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
 
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
-      const elementCenter = window.innerHeight / 2
-      const distanceFromCenter = Math.abs(rect.top - elementCenter)
-      const maxDistance = window.innerHeight
-      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
-      setOpacity(newOpacity)
+      
+      // Calculate scroll progress
+      const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
+      
+      // Transform: scale and translate
+      const scale = 0.95 + scrollProgress * 0.05
+      const translateY = (1 - scrollProgress) * 40
+      
+      setTransform({ scale, translateY })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -52,8 +56,12 @@ export function TestimonialsSection() {
   return (
     <section 
       ref={sectionRef}
-      className="py-20 px-6 bg-white transition-opacity duration-300"
-      style={{ opacity }}
+      className="py-20 px-6 bg-white"
+      style={{
+        transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        transformOrigin: 'center center',
+        willChange: 'transform'
+      }}
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -81,11 +89,9 @@ export function TestimonialsSection() {
               viewport={{ once: true, margin: '-50px' }}
               className="p-6 bg-white rounded-lg border border-amber-200 hover:shadow-lg hover:border-amber-400 transition-all duration-300"
             >
-              {/* Stars */}
-              <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-amber-600 text-lg">★</span>
-                ))}
+              {/* Rating */}
+              <div className="mb-4">
+                <span className="text-sm font-semibold text-amber-700">{testimonial.rating}/5 STARS</span>
               </div>
 
               {/* Quote */}
@@ -111,7 +117,7 @@ export function TestimonialsSection() {
           className="mt-16 text-center"
         >
           <div className="inline-block bg-gradient-to-r from-amber-50 to-white p-8 rounded-lg border border-amber-300">
-            <div className="text-5xl font-bold text-amber-900 mb-2">4.9★</div>
+            <div className="text-5xl font-bold text-amber-900 mb-2">4.9 OUT OF 5</div>
             <div className="text-amber-900 font-semibold mb-2">Based on 247 reviews</div>
             <p className="text-amber-800 font-light">See all reviews on Google & Facebook</p>
           </div>

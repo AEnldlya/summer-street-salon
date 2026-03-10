@@ -44,17 +44,21 @@ const services = [
 
 export function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [opacity, setOpacity] = useState(1)
+  const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
 
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
-      const elementCenter = window.innerHeight / 2
-      const distanceFromCenter = Math.abs(rect.top - elementCenter)
-      const maxDistance = window.innerHeight
-      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
-      setOpacity(newOpacity)
+      
+      // Calculate scroll progress
+      const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
+      
+      // Transform: scale and translate
+      const scale = 0.95 + scrollProgress * 0.05
+      const translateY = (1 - scrollProgress) * 40
+      
+      setTransform({ scale, translateY })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -64,9 +68,13 @@ export function ServicesSection() {
   return (
     <section 
       ref={sectionRef}
-      className="py-20 px-6 bg-amber-50/50 transition-opacity duration-300" 
+      className="py-20 px-6 bg-amber-50/50"
       id="services"
-      style={{ opacity }}
+      style={{
+        transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        transformOrigin: 'center center',
+        willChange: 'transform'
+      }}
     >
       <div className="max-w-6xl mx-auto">
         <motion.div
@@ -100,7 +108,7 @@ export function ServicesSection() {
               </div>
               <p className="text-amber-800 mb-4 text-sm">{service.description}</p>
               <div className="text-sm text-amber-700 flex items-center gap-2">
-                <span>⏱</span>
+                <span className="text-xs">TIME</span>
                 <span>{service.duration}</span>
               </div>
             </motion.div>

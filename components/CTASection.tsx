@@ -6,17 +6,21 @@ import { useRef, useState, useEffect } from 'react'
 
 export function CTASection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [opacity, setOpacity] = useState(1)
+  const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
 
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
-      const elementCenter = window.innerHeight / 2
-      const distanceFromCenter = Math.abs(rect.top - elementCenter)
-      const maxDistance = window.innerHeight
-      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
-      setOpacity(newOpacity)
+      
+      // Calculate scroll progress
+      const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
+      
+      // Transform: scale and translate
+      const scale = 0.95 + scrollProgress * 0.05
+      const translateY = (1 - scrollProgress) * 40
+      
+      setTransform({ scale, translateY })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -26,8 +30,12 @@ export function CTASection() {
   return (
     <section 
       ref={sectionRef}
-      className="py-20 px-6 bg-gradient-to-r from-amber-800 via-amber-900 to-amber-950 transition-opacity duration-300"
-      style={{ opacity }}
+      className="py-20 px-6 bg-gradient-to-r from-amber-800 via-amber-900 to-amber-950"
+      style={{
+        transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        transformOrigin: 'center center',
+        willChange: 'transform'
+      }}
     >
       <div className="max-w-4xl mx-auto text-center">
         <motion.div

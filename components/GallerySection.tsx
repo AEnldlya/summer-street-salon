@@ -46,7 +46,7 @@ const galleryItems = [
 export function GallerySection() {
   const [filter, setFilter] = useState('all')
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [opacity, setOpacity] = useState(1)
+  const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
 
   const filtered = filter === 'all' 
     ? galleryItems 
@@ -56,11 +56,15 @@ export function GallerySection() {
     const handleScroll = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
-      const elementCenter = window.innerHeight / 2
-      const distanceFromCenter = Math.abs(rect.top - elementCenter)
-      const maxDistance = window.innerHeight
-      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
-      setOpacity(newOpacity)
+      
+      // Calculate scroll progress
+      const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
+      
+      // Transform: scale and translate
+      const scale = 0.95 + scrollProgress * 0.05
+      const translateY = (1 - scrollProgress) * 40
+      
+      setTransform({ scale, translateY })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -70,8 +74,12 @@ export function GallerySection() {
   return (
     <section 
       ref={sectionRef}
-      className="py-20 px-6 bg-gradient-to-b from-white to-amber-50/30 transition-opacity duration-300"
-      style={{ opacity }}
+      className="py-20 px-6 bg-gradient-to-b from-white to-amber-50/30"
+      style={{
+        transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        transformOrigin: 'center center',
+        willChange: 'transform'
+      }}
     >
       <div className="max-w-6xl mx-auto">
         <motion.div

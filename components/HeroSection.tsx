@@ -7,21 +7,21 @@ import { useRef, useState, useEffect } from 'react'
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [opacity, setOpacity] = useState(1)
+  const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
 
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
-      const elementCenter = window.innerHeight / 2
       
-      // Element position relative to viewport center
-      const distanceFromCenter = Math.abs(rect.top - elementCenter)
-      const maxDistance = window.innerHeight
+      // Calculate scroll progress (0 to 1)
+      const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
       
-      // Fade out as you scroll away
-      const newOpacity = Math.max(0, 1 - distanceFromCenter / maxDistance)
-      setOpacity(newOpacity)
+      // Transform based on scroll: scale shrinks, translate moves up
+      const scale = 1 - scrollProgress * 0.15
+      const translateY = scrollProgress * 50
+      
+      setTransform({ scale, translateY })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -32,7 +32,11 @@ export function HeroSection() {
     <section 
       ref={sectionRef}
       className="relative h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-amber-100 overflow-hidden"
-      style={{ opacity, transition: 'opacity 0.3s ease-out' }}
+      style={{ 
+        transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        transformOrigin: 'center center',
+        willChange: 'transform'
+      }}
     >
       {/* Background hero images with overlay */}
       <div className="absolute inset-0">
@@ -101,7 +105,7 @@ export function HeroSection() {
           className="mt-16 flex justify-center items-center gap-8 flex-wrap"
         >
           <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg">
-            <div className="text-4xl font-bold text-amber-300">4.9★</div>
+            <div className="text-4xl font-bold text-amber-300">4.9</div>
             <div className="text-amber-50 text-sm">247 Reviews</div>
           </div>
           <div className="w-px h-12 bg-amber-300/40"></div>
@@ -129,8 +133,8 @@ export function HeroSection() {
           transition={{ duration: 2, repeat: Infinity }}
           className="text-amber-100 text-center"
         >
-          <div className="text-sm mb-2 font-light">Scroll to explore</div>
-          <div className="text-2xl">↓</div>
+          <div className="text-sm mb-3 font-light tracking-wide">SCROLL TO EXPLORE</div>
+          <div className="text-2xl">v</div>
         </motion.div>
       </motion.div>
     </section>
