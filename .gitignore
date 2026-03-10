@@ -10,3 +10,4 @@ build/
 *.swp
 *.swo
 *~
+package-lock.json
