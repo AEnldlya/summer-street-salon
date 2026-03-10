@@ -67,17 +67,25 @@ export function GallerySection() {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
       
-      // Calculate scroll progress
+      // Calculate visibility based on distance from viewport center
+      const elementCenter = rect.top + rect.height / 2
+      const viewportCenter = window.innerHeight / 2
+      const distanceFromCenter = Math.abs(elementCenter - viewportCenter)
+      const maxDistance = window.innerHeight / 2 + rect.height / 2
+      
+      // Opacity fades symmetrically - same fade in as fade out
+      const opacity = Math.max(0, Math.min(1, 1 - (distanceFromCenter / maxDistance) * 1.2))
+      
+      // Calculate scroll progress for scale/translate
       const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
       
       // Reduce animation intensity on mobile
       const scaleIntensity = isMobile ? 0.02 : 0.05
       const translateIntensity = isMobile ? 15 : 40
       
-      // Transform: scale, translate, and fade
+      // Transform: scale and translate
       const scale = 0.98 + scrollProgress * scaleIntensity
       const translateY = (1 - scrollProgress) * translateIntensity
-      const opacity = Math.max(0, 1 - (1 - scrollProgress) * 0.6)
       
       setTransform({ scale, translateY, opacity })
     }
