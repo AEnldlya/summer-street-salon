@@ -7,3 +7,4 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+// Build timestamp: Tue Mar 10 05:37:59 PM UTC 2026
