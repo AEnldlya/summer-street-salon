@@ -40,10 +40,10 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
             What Our Clients Say
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-600 text-lg font-light">
             Join thousands of happy customers
           </p>
         </motion.div>
@@ -56,22 +56,22 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="p-6 bg-gray-50 rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-300"
+              className="p-6 bg-white rounded-lg border border-yellow-100 hover:shadow-lg transition-all duration-300"
             >
               {/* Stars */}
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="text-yellow-400 text-lg">★</span>
+                  <span key={i} className="text-yellow-500 text-lg">★</span>
                 ))}
               </div>
 
               {/* Quote */}
-              <p className="text-gray-700 text-lg mb-6 italic">
+              <p className="text-gray-700 text-lg mb-6 italic font-light">
                 "{testimonial.text}"
               </p>
 
               {/* Author */}
-              <div className="border-t border-gray-200 pt-4">
+              <div className="border-t border-yellow-100 pt-4">
                 <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
                 <p className="text-sm text-gray-600">{testimonial.service}</p>
               </div>
@@ -87,10 +87,10 @@ export function TestimonialsSection() {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <div className="inline-block bg-gradient-to-r from-purple-50 to-blue-50 p-8 rounded-lg border border-purple-200">
-            <div className="text-5xl font-bold text-purple-600 mb-2">4.9★</div>
+          <div className="inline-block bg-gradient-to-r from-yellow-50 to-white p-8 rounded-lg border border-yellow-200">
+            <div className="text-5xl font-bold text-gray-900 mb-2">4.9★</div>
             <div className="text-gray-700 font-semibold mb-2">Based on 247 reviews</div>
-            <p className="text-gray-600">See all reviews on Google & Facebook</p>
+            <p className="text-gray-600 font-light">See all reviews on Google & Facebook</p>
           </div>
         </motion.div>
       </div>

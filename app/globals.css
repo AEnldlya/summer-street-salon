@@ -13,13 +13,19 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Georgia', 'Garamond', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #ffffff;
-  color: #1a1a1a;
+  background: #faf9f7;
+  color: #3a3a3a;
+  letter-spacing: 0.3px;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.5px;
 }
 
 code {
@@ -27,15 +33,16 @@ code {
     monospace;
 }
 
-/* Professional Color Scheme */
+/* Professional Color Scheme - Warm & Sophisticated */
 :root {
-  --primary: #2c3e50;
-  --primary-light: #34495e;
-  --accent: #c0a080;
-  --accent-light: #d4b896;
-  --text-dark: #2c3e50;
-  --text-light: #7f8c8d;
-  --bg-light: #f8f7f4;
+  --primary: #3d3d3d;
+  --primary-light: #5a5a5a;
+  --accent: #b8956a;
+  --accent-light: #d4af8f;
+  --accent-dark: #9d7e5d;
+  --text-dark: #2a2a2a;
+  --text-light: #6d6d6d;
+  --bg-light: #faf9f7;
   --white: #ffffff;
 }
 
@@ -77,6 +84,28 @@ code {
   }
   to {
     opacity: 0;
+  }
+}
+
+@keyframes fadeOutUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
   }
 }
 
