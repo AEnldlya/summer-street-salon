@@ -7,7 +7,7 @@ import { useRef, useState, useEffect } from 'react'
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [transform, setTransform] = useState({ scale: 1, translateY: 0, opacity: 1 })
+  const [transform, setTransform] = useState({ translateY: 0, opacity: 1 })
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -25,9 +25,8 @@ export function HeroSection() {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
       
-      // Reduce animation intensity on mobile for better performance
-      const intensity = isMobile ? 0.05 : 0.15
-      const translateIntensity = isMobile ? 20 : 50
+      // Translate intensity
+      const translateIntensity = isMobile ? 15 : 40
       
       // Calculate visibility based on distance from viewport center
       const elementCenter = rect.top + rect.height / 2
@@ -38,12 +37,11 @@ export function HeroSection() {
       // Opacity fades symmetrically - same fade in as fade out
       const opacity = Math.max(0, Math.min(1, 1 - (distanceFromCenter / maxDistance) * 1.2))
       
-      // Scale and translate based on scroll position
+      // Translate based on scroll position
       const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
-      const scale = 1 - scrollProgress * intensity
       const translateY = scrollProgress * translateIntensity
       
-      setTransform({ scale, translateY, opacity })
+      setTransform({ translateY, opacity })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -55,7 +53,7 @@ export function HeroSection() {
       ref={sectionRef}
       className="relative h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-amber-100 overflow-hidden"
       style={{ 
-        transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        transform: `translateY(${transform.translateY}px)`,
         opacity: transform.opacity,
         transformOrigin: 'center center',
         willChange: 'transform, opacity'

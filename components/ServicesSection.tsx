@@ -44,7 +44,7 @@ const services = [
 
 export function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [transform, setTransform] = useState({ scale: 1, translateY: 0, opacity: 1 })
+  const [transform, setTransform] = useState({ translateY: 0, opacity: 1 })
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -70,18 +70,16 @@ export function ServicesSection() {
       // Opacity fades symmetrically - same fade in as fade out
       const opacity = Math.max(0, Math.min(1, 1 - (distanceFromCenter / maxDistance) * 1.2))
       
-      // Calculate scroll progress for scale/translate
+      // Calculate scroll progress for translate
       const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
       
       // Reduce animation intensity on mobile
-      const scaleIntensity = isMobile ? 0.02 : 0.05
       const translateIntensity = isMobile ? 15 : 40
       
-      // Transform: scale and translate
-      const scale = 0.98 + scrollProgress * scaleIntensity
+      // Transform: translate only
       const translateY = (1 - scrollProgress) * translateIntensity
       
-      setTransform({ scale, translateY, opacity })
+      setTransform({ translateY, opacity })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -94,7 +92,7 @@ export function ServicesSection() {
       className="py-20 px-6 bg-amber-50/50"
       id="services"
       style={{
-        transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        transform: `translateY(${transform.translateY}px)`,
         opacity: transform.opacity,
         transformOrigin: 'center center',
         willChange: 'transform, opacity'
