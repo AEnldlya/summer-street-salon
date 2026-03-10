@@ -33,15 +33,15 @@ code {
     monospace;
 }
 
-/* Professional Color Scheme - Warm & Sophisticated */
+/* Professional Color Scheme - Warm Amber & Gold */
 :root {
-  --primary: #3d3d3d;
-  --primary-light: #5a5a5a;
-  --accent: #b8956a;
-  --accent-light: #d4af8f;
-  --accent-dark: #9d7e5d;
-  --text-dark: #2a2a2a;
-  --text-light: #6d6d6d;
+  --primary: #2a2a2a;
+  --primary-light: #4a4a4a;
+  --accent: #c19a6b;
+  --accent-light: #daa520;
+  --accent-dark: #a0826d;
+  --text-dark: #1a1a1a;
+  --text-light: #5a5a5a;
   --bg-light: #faf9f7;
   --white: #ffffff;
 }
@@ -106,6 +106,24 @@ code {
   to {
     opacity: 0;
     transform: translateY(20px);
+  }
+}
+
+@keyframes scrollFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scrollFadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 

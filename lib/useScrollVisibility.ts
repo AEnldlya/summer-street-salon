@@ -1,0 +1,44 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+
+interface ScrollVisibilityOptions {
+  threshold?: number;
+  rootMargin?: string;
+}
+
+export function useScrollVisibility(options: ScrollVisibilityOptions = {}) {
+  const { threshold = 0.1, rootMargin = '0px' } = options;
+  const ref = useRef<HTMLElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasBeenSeen, setHasBeenSeen] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          setHasBeenSeen(true);
+        } else {
+          setIsVisible(false);
+        }
+      },
+      {
+        threshold,
+        rootMargin,
+      }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [threshold, rootMargin]);
+
+  return { ref, isVisible, hasBeenSeen };
+}

@@ -43,19 +43,19 @@ const services = [
 
 export function ServicesSection() {
   return (
-    <section className="py-20 px-6 bg-faf9f7">
+    <section className="py-20 px-6 bg-amber-50/50" id="services">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4 tracking-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4 tracking-tight">
             Our Services
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto font-light">
+          <p className="text-amber-800 text-lg max-w-2xl mx-auto font-light">
             We offer a full range of professional hair services using premium products and techniques
           </p>
         </motion.div>
@@ -67,15 +67,15 @@ export function ServicesSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="p-6 border border-yellow-100 rounded-lg hover:shadow-lg transition-all duration-300 bg-white"
+              viewport={{ once: true, margin: '-50px' }}
+              className="p-6 border border-amber-200 rounded-lg hover:shadow-lg transition-all duration-300 bg-white hover:border-amber-400"
             >
               <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-semibold text-gray-800">{service.name}</h3>
-                <span className="text-2xl font-bold text-yellow-700">{service.price}</span>
+                <h3 className="text-xl font-semibold text-amber-900">{service.name}</h3>
+                <span className="text-2xl font-bold text-amber-700">{service.price}</span>
               </div>
-              <p className="text-gray-600 mb-4 text-sm">{service.description}</p>
-              <div className="text-sm text-gray-500 flex items-center gap-2">
+              <p className="text-amber-800 mb-4 text-sm">{service.description}</p>
+              <div className="text-sm text-amber-700 flex items-center gap-2">
                 <span>⏱</span>
                 <span>{service.duration}</span>
               </div>
@@ -90,12 +90,12 @@ export function ServicesSection() {
           viewport={{ once: true }}
           className="text-center mt-12"
         >
-          <p className="text-gray-600 mb-6">
-            First-time clients: <span className="font-bold text-purple-600">20% off</span> any service
+          <p className="text-amber-800 mb-6">
+            First-time clients: <span className="font-bold text-amber-700">20% off</span> any service
           </p>
           <a
             href="/booking"
-            className="inline-block px-8 py-3 bg-yellow-700 hover:bg-yellow-800 text-white font-semibold rounded transition-colors"
+            className="inline-block px-8 py-3 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-lg transition-colors duration-300"
           >
             Book Now
           </a>

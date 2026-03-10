@@ -2,37 +2,44 @@
 
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import Image from 'next/image'
 
 const galleryItems = [
   {
     title: 'Color Transformation',
     description: 'Vibrant burgundy highlights',
-    category: 'color'
+    category: 'color',
+    image: 'https://images.unsplash.com/photo-1562322503-7d3b7e7b7d7d?w=500&h=500&fit=crop'
   },
   {
     title: 'Blonde Balayage',
     description: 'Sun-kissed blonde transformation',
-    category: 'color'
+    category: 'color',
+    image: 'https://images.unsplash.com/photo-1579712514212-97975e83ce5c?w=500&h=500&fit=crop'
   },
   {
     title: 'Modern Pixie Cut',
     description: 'Short & chic styling',
-    category: 'cut'
+    category: 'cut',
+    image: 'https://images.unsplash.com/photo-1587049139290-139cfe06d2e1?w=500&h=500&fit=crop'
   },
   {
     title: 'Long Layers',
     description: 'Volume & movement',
-    category: 'cut'
+    category: 'cut',
+    image: 'https://images.unsplash.com/photo-1582332707712-f432e2d1b448?w=500&h=500&fit=crop'
   },
   {
     title: 'Curly Hair Care',
     description: 'Defined curls & texture',
-    category: 'treatment'
+    category: 'treatment',
+    image: 'https://images.unsplash.com/photo-1599653814097-6b85b8b1b13f?w=500&h=500&fit=crop'
   },
   {
     title: 'Sleek Straight',
     description: 'Keratin treatment result',
-    category: 'treatment'
+    category: 'treatment',
+    image: 'https://images.unsplash.com/photo-1596093002221-96fd1c8e9d29?w=500&h=500&fit=crop'
   },
 ]
 
@@ -44,33 +51,33 @@ export function GallerySection() {
     : galleryItems.filter(item => item.category === filter)
 
   return (
-    <section className="py-20 px-6 bg-white">
+    <section className="py-20 px-6 bg-gradient-to-b from-white to-amber-50/30">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
             Our Gallery
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-amber-800 text-lg">
             See the transformations we've created for our clients
           </p>
         </motion.div>
 
         {/* Filter buttons */}
-        <div className="flex justify-center gap-4 mb-12">
+        <div className="flex justify-center gap-4 mb-12 flex-wrap">
           {['all', 'cut', 'color', 'treatment'].map(category => (
             <button
               key={category}
               onClick={() => setFilter(category)}
               className={`px-6 py-2 rounded-full font-semibold transition-all ${
                 filter === category
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:border-purple-600'
+                  ? 'bg-amber-700 text-white'
+                  : 'bg-white text-amber-900 border border-amber-300 hover:border-amber-700'
               }`}
             >
               {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -86,16 +93,16 @@ export function GallerySection() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="relative h-64 bg-gradient-to-br from-gray-300 to-gray-400 rounded-lg overflow-hidden group cursor-pointer"
+              viewport={{ once: true, margin: '-50px' }}
+              className="relative h-64 bg-gradient-to-br from-amber-200 to-amber-300 rounded-lg overflow-hidden group cursor-pointer shadow-md hover:shadow-lg transition-shadow"
             >
-              {/* Placeholder image */}
-              <div className="w-full h-full flex items-center justify-center bg-gray-300">
-                <div className="text-center">
-                  <div className="text-4xl mb-2">📸</div>
-                  <div className="text-gray-700 font-semibold">Professional Photo</div>
-                </div>
-              </div>
+              {/* Gallery image */}
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-300"
+              />
 
               {/* Overlay */}
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-60 transition-all duration-300 flex items-end">
@@ -106,7 +113,7 @@ export function GallerySection() {
                   className="w-full p-4 text-white"
                 >
                   <h3 className="font-bold text-lg">{item.title}</h3>
-                  <p className="text-sm text-gray-200">{item.description}</p>
+                  <p className="text-sm text-amber-100">{item.description}</p>
                 </motion.div>
               </div>
             </motion.div>
@@ -122,7 +129,7 @@ export function GallerySection() {
         >
           <a
             href="/booking"
-            className="inline-block px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
+            className="inline-block px-8 py-3 bg-amber-700 hover:bg-amber-800 text-white font-semibold rounded-lg transition-colors duration-300"
           >
             Get Your Transformation
           </a>

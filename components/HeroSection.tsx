@@ -2,14 +2,47 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
+import { useRef, useState, useEffect } from 'react'
 
 export function HeroSection() {
+  const [scrollOpacity, setScrollOpacity] = useState(1)
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return
+      const rect = sectionRef.current.getBoundingClientRect()
+      const opacity = Math.max(0, 1 - rect.top / (window.innerHeight * 0.8))
+      setScrollOpacity(1 - opacity * 0.3)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
-    <section className="relative h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-yellow-50 overflow-hidden">
-      {/* Background accent elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-96 h-96 bg-yellow-700 rounded-full mix-blend-multiply filter blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-gray-400 rounded-full mix-blend-multiply filter blur-3xl"></div>
+    <section 
+      ref={sectionRef}
+      className="relative h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-amber-100 overflow-hidden"
+      style={{ opacity: scrollOpacity, transition: 'opacity 0.1s linear' }}
+    >
+      {/* Background hero images with overlay */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-r from-amber-900/70 via-amber-800/50 to-amber-700/60"></div>
+        <Image
+          src="https://images.unsplash.com/photo-1521746727202-7d02bca39249?w=1600&h=900&fit=crop"
+          alt="Professional salon styling"
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* Accent elements */}
+      <div className="absolute inset-0 opacity-10">
+        <div className="absolute top-20 left-20 w-96 h-96 bg-amber-600 rounded-full mix-blend-multiply filter blur-3xl"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-amber-700 rounded-full mix-blend-multiply filter blur-3xl"></div>
       </div>
 
       {/* Content */}
@@ -19,7 +52,7 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight tracking-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight tracking-tight drop-shadow-lg">
             Transform Your Look
           </h1>
         </motion.div>
@@ -28,7 +61,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="text-xl md:text-2xl text-gray-700 mb-12 font-light"
+          className="text-xl md:text-2xl text-amber-50 mb-12 font-light drop-shadow-md"
         >
           Expert hair care, cuts & color styling • Boston's #1 rated salon
         </motion.p>
@@ -41,13 +74,13 @@ export function HeroSection() {
         >
           <Link
             href="/booking"
-            className="px-8 py-4 bg-gray-800 hover:bg-gray-900 text-white font-semibold rounded transition-all duration-300 transform hover:scale-105 shadow-lg"
+            className="px-8 py-4 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             Book Your Appointment
           </Link>
           <Link
             href="/gallery"
-            className="px-8 py-4 border-2 border-gray-400 text-gray-800 font-semibold rounded hover:bg-gray-800 hover:text-white transition-all duration-300"
+            className="px-8 py-4 border-2 border-amber-200 text-white font-semibold rounded-lg hover:bg-amber-700/30 transition-all duration-300 backdrop-blur-sm"
           >
             View Our Work
           </Link>
@@ -58,21 +91,21 @@ export function HeroSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="mt-16 flex justify-center items-center gap-8"
+          className="mt-16 flex justify-center items-center gap-8 flex-wrap"
         >
-          <div>
-            <div className="text-4xl font-bold text-gray-900">4.9★</div>
-            <div className="text-gray-600 text-sm">247 Reviews</div>
+          <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg">
+            <div className="text-4xl font-bold text-amber-300">4.9★</div>
+            <div className="text-amber-50 text-sm">247 Reviews</div>
           </div>
-          <div className="w-px h-12 bg-yellow-400"></div>
-          <div>
-            <div className="text-4xl font-bold text-gray-900">15+</div>
-            <div className="text-gray-600 text-sm">Years Experience</div>
+          <div className="w-px h-12 bg-amber-300/40"></div>
+          <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg">
+            <div className="text-4xl font-bold text-amber-300">15+</div>
+            <div className="text-amber-50 text-sm">Years Experience</div>
           </div>
-          <div className="w-px h-12 bg-yellow-400"></div>
-          <div>
-            <div className="text-4xl font-bold text-gray-900">2000+</div>
-            <div className="text-gray-600 text-sm">Happy Clients</div>
+          <div className="w-px h-12 bg-amber-300/40"></div>
+          <div className="bg-white/10 backdrop-blur-sm px-6 py-3 rounded-lg">
+            <div className="text-4xl font-bold text-amber-300">2000+</div>
+            <div className="text-amber-50 text-sm">Happy Clients</div>
           </div>
         </motion.div>
       </div>
@@ -87,7 +120,7 @@ export function HeroSection() {
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="text-gray-700 text-center"
+          className="text-amber-100 text-center"
         >
           <div className="text-sm mb-2 font-light">Scroll to explore</div>
           <div className="text-2xl">↓</div>
