@@ -3,12 +3,42 @@
 import { motion } from 'framer-motion'
 
 const galleryItems = [
-  { title: 'Color Transformation', description: 'Vibrant burgundy highlights', category: 'color', image: '🎨' },
-  { title: 'Blonde Balayage', description: 'Sun-kissed blonde transformation', category: 'color', image: '✨' },
-  { title: 'Modern Pixie Cut', description: 'Short & chic styling', category: 'cut', image: '✂️' },
-  { title: 'Long Layers', description: 'Volume & movement', category: 'cut', image: '💇' },
-  { title: 'Curly Hair Care', description: 'Defined curls & texture', category: 'treatment', image: '🌊' },
-  { title: 'Sleek Straight', description: 'Keratin treatment result', category: 'treatment', image: '🪮' },
+  { 
+    title: 'Color Transformation', 
+    description: 'Vibrant burgundy highlights', 
+    category: 'color', 
+    image: 'https://images.unsplash.com/photo-1613211503411-b6a662ee9402?w=500&h=600&fit=crop' 
+  },
+  { 
+    title: 'Blonde Balayage', 
+    description: 'Sun-kissed blonde transformation', 
+    category: 'color', 
+    image: 'https://images.unsplash.com/photo-1560264357-8d9766d20768?w=500&h=600&fit=crop' 
+  },
+  { 
+    title: 'Modern Pixie Cut', 
+    description: 'Short & chic styling', 
+    category: 'cut', 
+    image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500&h=600&fit=crop' 
+  },
+  { 
+    title: 'Long Layers', 
+    description: 'Volume & movement', 
+    category: 'cut', 
+    image: 'https://images.unsplash.com/photo-1522335617519-246b2b4da5a9?w=500&h=600&fit=crop' 
+  },
+  { 
+    title: 'Curly Hair Care', 
+    description: 'Defined curls & texture', 
+    category: 'treatment', 
+    image: 'https://images.unsplash.com/photo-1595475237320-ba8428175885?w=500&h=600&fit=crop' 
+  },
+  { 
+    title: 'Sleek Straight', 
+    description: 'Keratin treatment result', 
+    category: 'treatment', 
+    image: 'https://images.unsplash.com/photo-1611003228941-98852ba62227?w=500&h=600&fit=crop' 
+  },
 ]
 
 export default function GalleryPage() {
@@ -21,10 +51,10 @@ export default function GalleryPage() {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h1 className="text-4xl md:text-5xl font-bold text-amber-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 tracking-tight">
             Our Gallery
           </h1>
-          <p className="text-amber-800 text-lg">
+          <p className="text-gray-600 text-lg font-light">
             See the transformations we've created for our clients
           </p>
         </motion.div>
@@ -39,14 +69,13 @@ export default function GalleryPage() {
               viewport={{ once: true }}
               className="group"
             >
-              <div className="relative h-64 bg-gradient-to-br from-amber-100 to-amber-50 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                {/* Image Placeholder */}
-                <div className="w-full h-full flex items-center justify-center bg-amber-50">
-                  <div className="text-center">
-                    <div className="text-6xl mb-2">{item.image}</div>
-                    <p className="text-amber-800 font-semibold">{item.category.toUpperCase()}</p>
-                  </div>
-                </div>
+              <div className="relative h-64 bg-gradient-to-br from-gray-200 to-gray-100 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                {/* Image */}
+                <img 
+                  src={item.image} 
+                  alt={item.title}
+                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                />
 
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-80 transition-all duration-300 flex items-end">
@@ -60,22 +89,7 @@ export default function GalleryPage() {
           ))}
         </div>
 
-        {/* Note for Real Photos */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-16 bg-amber-50 rounded-lg p-8 text-center"
-        >
-          <h2 className="text-2xl font-bold text-amber-900 mb-4">Replace with Real Photos</h2>
-          <p className="text-amber-800 mb-4">
-            To add real photos to this gallery, replace the emoji placeholders with actual image paths:
-          </p>
-          <code className="bg-white p-4 rounded inline-block text-left text-sm font-mono">
-            &lt;Image src="/photos/haircut-1.jpg" alt="..." /&gt;
-          </code>
-        </motion.div>
+
       </div>
     </div>
   )
