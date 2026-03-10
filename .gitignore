@@ -3,3 +3,10 @@ node_modules/
 .vercel/
 *.log
 .env.local
+.env.*.local
+dist/
+build/
+.DS_Store
+*.swp
+*.swo
+*~
