@@ -7,7 +7,7 @@ import { useRef, useState, useEffect } from 'react'
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
+  const [transform, setTransform] = useState({ scale: 1, translateY: 0, opacity: 1 })
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -32,11 +32,12 @@ export function HeroSection() {
       // Calculate scroll progress (0 to 1)
       const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
       
-      // Transform based on scroll: scale shrinks, translate moves up
+      // Transform based on scroll: scale shrinks, translate moves up, fade out
       const scale = 1 - scrollProgress * intensity
       const translateY = scrollProgress * translateIntensity
+      const opacity = Math.max(0, 1 - scrollProgress * 0.8)
       
-      setTransform({ scale, translateY })
+      setTransform({ scale, translateY, opacity })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -49,8 +50,9 @@ export function HeroSection() {
       className="relative h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-white to-amber-100 overflow-hidden"
       style={{ 
         transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        opacity: transform.opacity,
         transformOrigin: 'center center',
-        willChange: 'transform'
+        willChange: 'transform, opacity'
       }}
     >
       {/* Background hero images with overlay */}

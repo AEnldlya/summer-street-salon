@@ -9,44 +9,44 @@ const galleryItems = [
     title: 'Color Transformation',
     description: 'Vibrant burgundy highlights',
     category: 'color',
-    image: 'https://images.unsplash.com/photo-1562322503-7d3b7e7b7d7d?w=500&h=500&fit=crop'
+    image: 'https://images.pexels.com/photos/3622617/pexels-photo-3622617.jpeg?w=500&h=500&fit=crop'
   },
   {
     title: 'Blonde Balayage',
     description: 'Sun-kissed blonde transformation',
     category: 'color',
-    image: 'https://images.unsplash.com/photo-1579712514212-97975e83ce5c?w=500&h=500&fit=crop'
+    image: 'https://images.pexels.com/photos/5062123/pexels-photo-5062123.jpeg?w=500&h=500&fit=crop'
   },
   {
     title: 'Modern Pixie Cut',
     description: 'Short & chic styling',
     category: 'cut',
-    image: 'https://images.unsplash.com/photo-1587049139290-139cfe06d2e1?w=500&h=500&fit=crop'
+    image: 'https://images.pexels.com/photos/3807517/pexels-photo-3807517.jpeg?w=500&h=500&fit=crop'
   },
   {
     title: 'Long Layers',
     description: 'Volume & movement',
     category: 'cut',
-    image: 'https://images.unsplash.com/photo-1582332707712-f432e2d1b448?w=500&h=500&fit=crop'
+    image: 'https://images.pexels.com/photos/3962286/pexels-photo-3962286.jpeg?w=500&h=500&fit=crop'
   },
   {
     title: 'Curly Hair Care',
     description: 'Defined curls & texture',
     category: 'treatment',
-    image: 'https://images.unsplash.com/photo-1599653814097-6b85b8b1b13f?w=500&h=500&fit=crop'
+    image: 'https://images.pexels.com/photos/6764035/pexels-photo-6764035.jpeg?w=500&h=500&fit=crop'
   },
   {
     title: 'Sleek Straight',
     description: 'Keratin treatment result',
     category: 'treatment',
-    image: 'https://images.unsplash.com/photo-1596093002221-96fd1c8e9d29?w=500&h=500&fit=crop'
+    image: 'https://images.pexels.com/photos/3808015/pexels-photo-3808015.jpeg?w=500&h=500&fit=crop'
   },
 ]
 
 export function GallerySection() {
   const [filter, setFilter] = useState('all')
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
+  const [transform, setTransform] = useState({ scale: 1, translateY: 0, opacity: 1 })
   const [isMobile, setIsMobile] = useState(false)
 
   const filtered = filter === 'all' 
@@ -74,11 +74,12 @@ export function GallerySection() {
       const scaleIntensity = isMobile ? 0.02 : 0.05
       const translateIntensity = isMobile ? 15 : 40
       
-      // Transform: scale and translate
+      // Transform: scale, translate, and fade
       const scale = 0.98 + scrollProgress * scaleIntensity
       const translateY = (1 - scrollProgress) * translateIntensity
+      const opacity = Math.max(0, 1 - (1 - scrollProgress) * 0.6)
       
-      setTransform({ scale, translateY })
+      setTransform({ scale, translateY, opacity })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -91,8 +92,9 @@ export function GallerySection() {
       className="py-20 px-6 bg-gradient-to-b from-white to-amber-50/30"
       style={{
         transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        opacity: transform.opacity,
         transformOrigin: 'center center',
-        willChange: 'transform'
+        willChange: 'transform, opacity'
       }}
     >
       <div className="max-w-6xl mx-auto">

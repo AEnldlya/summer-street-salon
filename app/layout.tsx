@@ -1,7 +1,11 @@
 import type { Metadata } from 'next'
+import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import { Navigation } from '@/components/Navigation'
 import { Footer } from '@/components/Footer'
+
+const inter = Inter({ subsets: ['latin'], display: 'swap' })
+const poppins = Poppins({ weight: ['400', '600', '700', '800'], subsets: ['latin'], display: 'swap' })
 
 export const metadata: Metadata = {
   title: 'Summer Street Hair Studio | Boston\'s Premier Salon',
@@ -59,7 +63,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-white text-gray-900">
+      <body className={`${inter.className} bg-white text-gray-900`}>
         <Navigation />
         <main>
           {children}

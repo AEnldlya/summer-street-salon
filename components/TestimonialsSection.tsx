@@ -32,7 +32,7 @@ const testimonials = [
 
 export function TestimonialsSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
+  const [transform, setTransform] = useState({ scale: 1, translateY: 0, opacity: 1 })
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -56,11 +56,12 @@ export function TestimonialsSection() {
       const scaleIntensity = isMobile ? 0.02 : 0.05
       const translateIntensity = isMobile ? 15 : 40
       
-      // Transform: scale and translate
+      // Transform: scale, translate, and fade
       const scale = 0.98 + scrollProgress * scaleIntensity
       const translateY = (1 - scrollProgress) * translateIntensity
+      const opacity = Math.max(0, 1 - (1 - scrollProgress) * 0.6)
       
-      setTransform({ scale, translateY })
+      setTransform({ scale, translateY, opacity })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -73,8 +74,9 @@ export function TestimonialsSection() {
       className="py-20 px-6 bg-white"
       style={{
         transform: `scale(${transform.scale}) translateY(${transform.translateY}px)`,
+        opacity: transform.opacity,
         transformOrigin: 'center center',
-        willChange: 'transform'
+        willChange: 'transform, opacity'
       }}
     >
       <div className="max-w-6xl mx-auto">
