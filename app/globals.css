@@ -18,6 +18,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #ffffff;
+  color: #1a1a1a;
 }
 
 code {
@@ -25,7 +27,28 @@ code {
     monospace;
 }
 
-/* Custom animations */
+/* Professional Color Scheme */
+:root {
+  --primary: #2c3e50;
+  --primary-light: #34495e;
+  --accent: #c0a080;
+  --accent-light: #d4b896;
+  --text-dark: #2c3e50;
+  --text-light: #7f8c8d;
+  --bg-light: #f8f7f4;
+  --white: #ffffff;
+}
+
+/* Fade animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -37,11 +60,54 @@ code {
   }
 }
 
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out;
+}
+
 .animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.animate-fade-out {
+  animation: fadeOut 0.8s ease-in;
 }
 
 /* Smooth transitions */
-button, a {
+button, a, input, textarea {
   transition: all 0.3s ease;
+}
+
+/* Professional styling */
+section {
+  scroll-margin-top: 80px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
