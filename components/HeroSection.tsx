@@ -8,25 +8,40 @@ import { useRef, useState, useEffect } from 'react'
 export function HeroSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    // Check if mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
       
+      // Reduce animation intensity on mobile for better performance
+      const intensity = isMobile ? 0.05 : 0.15
+      const translateIntensity = isMobile ? 20 : 50
+      
       // Calculate scroll progress (0 to 1)
       const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
       
       // Transform based on scroll: scale shrinks, translate moves up
-      const scale = 1 - scrollProgress * 0.15
-      const translateY = scrollProgress * 50
+      const scale = 1 - scrollProgress * intensity
+      const translateY = scrollProgress * translateIntensity
       
       setTransform({ scale, translateY })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isMobile])
 
   return (
     <section 

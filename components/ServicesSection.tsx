@@ -45,6 +45,16 @@ const services = [
 export function ServicesSection() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [transform, setTransform] = useState({ scale: 1, translateY: 0 })
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -54,16 +64,20 @@ export function ServicesSection() {
       // Calculate scroll progress
       const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
       
+      // Reduce animation intensity on mobile
+      const scaleIntensity = isMobile ? 0.02 : 0.05
+      const translateIntensity = isMobile ? 15 : 40
+      
       // Transform: scale and translate
-      const scale = 0.95 + scrollProgress * 0.05
-      const translateY = (1 - scrollProgress) * 40
+      const scale = 0.98 + scrollProgress * scaleIntensity
+      const translateY = (1 - scrollProgress) * translateIntensity
       
       setTransform({ scale, translateY })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isMobile])
 
   return (
     <section 

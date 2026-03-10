@@ -75,13 +75,44 @@ export function Navigation() {
           className="md:hidden bg-amber-50 border-t border-amber-100 p-4"
         >
           <div className="flex flex-col gap-4">
-            <Link href="/" className="text-amber-900 hover:text-amber-700 font-semibold">Home</Link>
-            <Link href="/#services" className="text-amber-900 hover:text-amber-700 font-semibold">Services</Link>
-            <Link href="/gallery" className="text-amber-900 hover:text-amber-700 font-semibold">Gallery</Link>
-            <Link href="/about" className="text-amber-900 hover:text-amber-700 font-semibold">About</Link>
-            <Link href="/contact" className="text-amber-900 hover:text-amber-700 font-semibold">Contact</Link>
+            <Link 
+              href="/" 
+              onClick={() => setIsOpen(false)}
+              className="text-amber-900 hover:text-amber-700 font-semibold py-2"
+            >
+              Home
+            </Link>
+            <Link 
+              href="/#services"
+              onClick={() => setIsOpen(false)}
+              className="text-amber-900 hover:text-amber-700 font-semibold py-2"
+            >
+              Services
+            </Link>
+            <Link 
+              href="/gallery"
+              onClick={() => setIsOpen(false)}
+              className="text-amber-900 hover:text-amber-700 font-semibold py-2"
+            >
+              Gallery
+            </Link>
+            <Link 
+              href="/about"
+              onClick={() => setIsOpen(false)}
+              className="text-amber-900 hover:text-amber-700 font-semibold py-2"
+            >
+              About
+            </Link>
+            <Link 
+              href="/contact"
+              onClick={() => setIsOpen(false)}
+              className="text-amber-900 hover:text-amber-700 font-semibold py-2"
+            >
+              Contact
+            </Link>
             <Link
               href="/booking"
+              onClick={() => setIsOpen(false)}
               className="block px-6 py-2 bg-amber-700 text-white font-semibold text-center hover:bg-amber-800 transition-colors"
             >
               Book Now
