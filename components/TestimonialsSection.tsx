@@ -49,14 +49,23 @@ export function TestimonialsSection() {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
       
-      // Calculate visibility based on distance from viewport center
-      const elementCenter = rect.top + rect.height / 2
-      const viewportCenter = window.innerHeight / 2
-      const distanceFromCenter = Math.abs(elementCenter - viewportCenter)
-      const maxDistance = window.innerHeight / 2 + rect.height / 2
+      // Only fade when section is mostly off-screen (not in reading area)
+      const elementTop = rect.top
+      const elementBottom = rect.bottom
+      const viewportHeight = window.innerHeight
       
-      // Opacity fades symmetrically - same fade in as fade out
-      const opacity = Math.max(0, Math.min(1, 1 - (distanceFromCenter / maxDistance) * 1.2))
+      // Fade only starts when section exits viewport (beyond padding threshold)
+      const fadePadding = 100 // Start fade 100px before completely off-screen
+      let opacity = 1
+      
+      if (elementBottom < -fadePadding) {
+        // Above viewport, fading out
+        opacity = Math.max(0, (elementBottom + fadePadding) / fadePadding)
+      } else if (elementTop > viewportHeight + fadePadding) {
+        // Below viewport, fading out
+        opacity = Math.max(0, (viewportHeight + fadePadding - elementTop) / fadePadding)
+      }
+      // When in viewport or close to it: fully opaque
       
       // Calculate scroll progress for translate
       const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))

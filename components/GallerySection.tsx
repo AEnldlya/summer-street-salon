@@ -46,7 +46,7 @@ const galleryItems = [
 export function GallerySection() {
   const [filter, setFilter] = useState('all')
   const sectionRef = useRef<HTMLDivElement>(null)
-  const [transform, setTransform] = useState({ translateY: 0, opacity: 1 })
+  const [transform, setTransform] = useState({ translateY: 0, opacity: 1, blur: 0 })
   const [isMobile, setIsMobile] = useState(false)
 
   const filtered = filter === 'all' 
@@ -67,14 +67,23 @@ export function GallerySection() {
       if (!sectionRef.current) return
       const rect = sectionRef.current.getBoundingClientRect()
       
-      // Calculate visibility based on distance from viewport center
-      const elementCenter = rect.top + rect.height / 2
-      const viewportCenter = window.innerHeight / 2
-      const distanceFromCenter = Math.abs(elementCenter - viewportCenter)
-      const maxDistance = window.innerHeight / 2 + rect.height / 2
+      // Only fade when section is mostly off-screen (not in reading area)
+      const elementTop = rect.top
+      const elementBottom = rect.bottom
+      const viewportHeight = window.innerHeight
       
-      // Opacity fades symmetrically - same fade in as fade out
-      const opacity = Math.max(0, Math.min(1, 1 - (distanceFromCenter / maxDistance) * 1.2))
+      // Fade only starts when section exits viewport (beyond padding threshold)
+      const fadePadding = 100 // Start fade 100px before completely off-screen
+      let opacity = 1
+      
+      if (elementBottom < -fadePadding) {
+        // Above viewport, fading out
+        opacity = Math.max(0, (elementBottom + fadePadding) / fadePadding)
+      } else if (elementTop > viewportHeight + fadePadding) {
+        // Below viewport, fading out
+        opacity = Math.max(0, (viewportHeight + fadePadding - elementTop) / fadePadding)
+      }
+      // When in viewport or close to it: fully opaque
       
       // Calculate scroll progress for translate
       const scrollProgress = Math.min(1, Math.max(-0.5, (window.innerHeight - rect.top) / (window.innerHeight * 1.5)))
@@ -82,10 +91,13 @@ export function GallerySection() {
       // Reduce animation intensity on mobile
       const translateIntensity = isMobile ? 15 : 40
       
+      // Add blur effect as section fades out (max 5px blur)
+      const blur = (1 - opacity) * 5
+      
       // Transform: translate only
       const translateY = (1 - scrollProgress) * translateIntensity
       
-      setTransform({ translateY, opacity })
+      setTransform({ translateY, opacity, blur })
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -99,8 +111,9 @@ export function GallerySection() {
       style={{
         transform: `translateY(${transform.translateY}px)`,
         opacity: transform.opacity,
+        filter: `blur(${transform.blur}px)`,
         transformOrigin: 'center center',
-        willChange: 'transform, opacity'
+        willChange: 'transform, opacity, filter'
       }}
     >
       <div className="max-w-6xl mx-auto">
